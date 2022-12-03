@@ -12,10 +12,9 @@ input.addEventListener('input', debounce(onSerch, DEBOUNCE_DELAY));
 
 function onSerch(event) {
   const searchQuery = event.target.value.trim();
-  //   deleteInfo();
+  deleteInfo();
   console.log(searchQuery);
   if (searchQuery === '') {
-    deleteInfo();
     return;
   }
 
