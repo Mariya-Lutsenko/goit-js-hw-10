@@ -18,3 +18,20 @@ body {
   max-width: 320px;
   margin-bottom: 16px;
 }
+.country-info li {
+  list-style: none;
+  width: fit-content;
+  border-width: 2px;
+  border-radius: 5px;
+  border-color: rgb(190, 190, 190);
+  border-style: solid;
+  background: linear-gradient();
+  background: rgb(243, 247, 249);
+  background: linear-gradient(
+    357deg,
+    rgba(243, 247, 249, 0.7122199221485469) 30%,
+    rgba(195, 237, 246, 1) 100%
+  );
+  padding: 15px;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
