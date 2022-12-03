@@ -10,12 +10,10 @@ const DEBOUNCE_DELAY = 300;
 
 
 input.addEventListener('input', debounce(onSerch, DEBOUNCE_DELAY));
-
 function onSerch (event) {
     event.preventDefault();
     const searchQuery = event.target.value.trim();
     deleteInfo ();
-    console.log(searchQuery);
     if (searchQuery !== '') {
         fetchCountries(searchQuery).then(data =>{
             if (data.length > 10) {
@@ -23,7 +21,7 @@ function onSerch (event) {
                     'Too many matches found. Please enter a more specific name.');
             }
             else if (data.length === 0) {
-                console.log('Oops, there is no country with that name')
+                Notiflix.Notify.failure('Oops, there is no country with that name');
             }
             else if (data.length >=2 && data.length <=10 ) {
                 renderCountriesList(data);
@@ -34,9 +32,30 @@ function onSerch (event) {
         });
     }
     }
+// function onSerch (event) {
+//     event.preventDefault();
+//     const searchQuery = event.target.value.trim();
+//     deleteInfo ();
+//     console.log(searchQuery);
+//     if (searchQuery !== '') {
+//         fetchCountries(searchQuery).then(data =>{
+//             if (data.length > 10) {
+//                 Notiflix.Notify.info(
+//                     'Too many matches found. Please enter a more specific name.');
+//             }
+//             else if (data.length === 0) {
+//                 Notiflix.Notify.failure('Oops, there is no country with that name');
+//             }
+//             else if (data.length >=2 && data.length <=10 ) {
+//                 renderCountriesList(data);
+//             }
+//             else if (data.length === 1) {
+//                 renderContryCard(data);
+//             }
+//         });
+//     }
+//     }
  
-
-
 
 function renderCountriesList (countries) {
     const markup = countries.map(country => {
@@ -66,3 +85,8 @@ function deleteInfo () {
     countryList.innerHTML = '';
     countryInfo.innerHTML = '';
 }
+
+// function onFetchError (error) {
+//     Notiflix.Notify.failure('Oops, there is no country with that name');
+// }
+
