@@ -12,8 +12,8 @@ input.addEventListener('input', debounce(onSerch, DEBOUNCE_DELAY));
 
 function onSerch(event) {
   const searchQuery = event.target.value.trim();
-  deleteInfo();
-  if (searchQuery === '') {
+  updateInfo();
+  if (!searchQuery) {
     return;
   }
 
@@ -24,16 +24,18 @@ function onSerch(event) {
           'Too many matches found. Please enter a more specific name.'
         );
       } else if (countries.length >= 2 && countries.length <= 10) {
-        renderCountriesList(countries);
+        const markUp = renderCountriesList(countries);
+        updateInfo(markUp);
       } else if (countries.length === 1) {
-        renderContryCard(countries);
+        const markUp = renderContryCard(countries);
+        updateInfo('', markUp);
       }
     })
     .catch(error => onFetchError());
 }
 
 function renderCountriesList(countries) {
-  const markup = countries
+  return countries
     .map(country => {
       return `<li>
         <img src="${country.flags.svg}" alt="Flag of ${country.name.official}" width="30" hight="20">
@@ -41,11 +43,11 @@ function renderCountriesList(countries) {
     </li>`;
     })
     .join('');
-  countryList.innerHTML = markup;
+  // countryList.innerHTML = markup;
 }
 
 function renderContryCard(countries) {
-  const markup = countries
+  return countries
     .map(country => {
       return `
       <li>
@@ -60,12 +62,12 @@ function renderContryCard(countries) {
               )} </p></li>`;
     })
     .join('');
-  countryInfo.innerHTML = markup;
+  // countryInfo.innerHTML = markup;
 }
 
-function deleteInfo() {
-  countryList.innerHTML = '';
-  countryInfo.innerHTML = '';
+function updateInfo(list = '', info = '') {
+  countryList.innerHTML = list;
+  countryInfo.innerHTML = info;
 }
 
 function onFetchError(error) {
