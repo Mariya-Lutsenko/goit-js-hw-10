@@ -43,7 +43,6 @@ function renderCountriesList(countries) {
     </li>`;
     })
     .join('');
-  // countryList.innerHTML = markup;
 }
 
 function renderContryCard(countries) {
@@ -62,7 +61,6 @@ function renderContryCard(countries) {
               )} </p></li>`;
     })
     .join('');
-  // countryInfo.innerHTML = markup;
 }
 
 function updateInfo(list = '', info = '') {
